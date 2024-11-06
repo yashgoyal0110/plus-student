@@ -1,0 +1,113 @@
+.outerDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px; 
+  margin-top: 80px;
+  margin-bottom: 30px;
+  width: 100%; 
+  height: 100%;
+  }
+.detailCard {
+    width: 300px;
+    height: 520px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin: 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: popUp 0.5s ease-out; 
+    transition: transform 0.3s ease; 
+}
+
+.detailCard:hover {
+  transform: scale(1.03); /* Scale up slightly on hover */
+}
+
+  @keyframes popUp {
+    0% {
+      transform: scale(0.5);
+      opacity: 0;
+    }
+    70% {
+      transform: scale(1.05);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  
+ 
+   .detailImage {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+  
+  .courseContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 15px;
+    padding: 16px;
+  }
+  
+  .courseName {
+    font-size: 20px;
+    font-weight: bold;
+    color: #faf6f6;
+  }
+  
+  .instructorName {
+    font-size: 16px;
+    color: #c0bcbc;
+    font-weight: 500; 
+  }
+  
+  .detail {
+    font-size: 14px;
+    color: #fcf7f7;
+    margin: 4px 0;
+  }
+  
+  .buyNowButton {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #ff5e00;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .videoFrame {
+    width: 280px; /* Adjust width and height to match your design */
+    height: 180px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    animation: popUp 0.5s ease-out;
+  transition: transform 0.3s ease;
+  }
+  .videoFrame:hover {
+    transform: scale(1.01);
+  }
+.iframeContainer{
+  width: 320px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 30px;
+}
+
+@media screen and (max-width:800px){
+  .outerDiv{
+    flex-direction: column;
+  }
+}
+
