@@ -8,7 +8,6 @@ const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
 
   const navigateTo = useNavigate();
   const handleLogin = async (e) => {
@@ -17,7 +16,7 @@ const Login = () => {
       await axios
         .post(
           "https://plus-backend.onrender.com/api/v1/user/login",
-          { email, password, confirmPassword, role: "Student" },
+          { email, password, role: "Student" },
           {
             withCredentials: true,
             headers: { "Content-Type": "application/json" },
@@ -29,7 +28,6 @@ const Login = () => {
           navigateTo("/");
           setEmail("");
           setPassword("");
-          setConfirmPassword("");
         });
     } catch (error) {
       toast.error(error.response.data.message);
@@ -58,12 +56,6 @@ const Login = () => {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="Confirm Password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
           />
           <div
             style={{
