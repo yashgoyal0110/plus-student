@@ -1,79 +1,99 @@
-import { useState, useContext } from "react";
-import { Link, useNavigate, Navigate } from "react-router-dom";
-import { Context } from "../main";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-const Login = () => {
-  const { isAuthenticated, setIsAuthenticated } = useContext(Context);
-
+const MessageForm = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
+  const [message, setMessage] = useState("");
+  const [loader, setLoader] = useState(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  useEffect(() => {
+    setIsButtonDisabled(!email || !lastName || !firstName || !lastName || !phone || !message);
+  }, [firstName, lastName, email, phone, message]);
 
-  const navigateTo = useNavigate();
-  const handleLogin = async (e) => {
+  const handleMessage = async (e) => {
     e.preventDefault();
     try {
+      setLoader(true);
       await axios
         .post(
-          "https://plus-backend.onrender.com/api/v1/user/login",
-          { email, password, role: "Student" },
+          "https://plus-backend.onrender.com/api/v1/message/send", // url
+          { firstName, lastName, email, phone, message }, // data to be send
           {
             withCredentials: true,
-            headers: { "Content-Type": "application/json" },
+            headers: {
+              "Content-Type": "application/json",
+            },
           }
         )
         .then((res) => {
           toast.success(res.data.message);
-          setIsAuthenticated(true);
-          navigateTo("/");
+          setFirstName("");
+          setLastName("");
           setEmail("");
-          setPassword("");
+          setPhone("");
+          setMessage("");
         });
+      setLoader(false);
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(error.response?.data?.message || "Failed to send message");
     }
   };
-  if (isAuthenticated) {
-    return <Navigate to={"/"} />;
-  }
   return (
     <>
-      <div className="container form-component login-form">
-        <h2 className="h2">Sign In</h2>
-        <p>Please Login To Continue</p>
-        <p>
-        Welcome back! Log in to access your personalized learning dashboard, explore new courses, and track your progress
-        </p>
-        <form onSubmit={handleLogin}>
-          <input
-            type="text"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <div
-            style={{
-              gap: "10px",
-              justifyContent: "flex-end",
-              flexDirection: "row",
-            }}
-          >
-            <p style={{ marginBottom: 0 }}>Not Registered?</p>
-            <Link className="registerNow"
-              to={"/register"}
-              style={{ textDecoration: "underline", color: "#f76029", }} 
-            >
-              Register Now
-            </Link>
+      <div
+        className="container form-component message-form"
+        style={{ top: "20px" }}
+      >
+        <h2 style={{ bottom: "30px" }}>Have a doubt? Send a message to us</h2>
+        <form onSubmit={handleMessage}>
+          <div>
+            <input
+              type="text"
+              placeholder="First Name"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Last Name"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+            />
           </div>
+          <div>
+            <input
+              type="text"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              type="number"
+              placeholder="Mobile Number"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+          </div>
+          <textarea
+            rows={7}
+            placeholder="Message"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+          />
           <div style={{ justifyContent: "center", alignItems: "center" }}>
-            <button type="submit">Login</button>
+            <button
+              type="submit"
+              disabled={isButtonDisabled || loader}
+              style={{
+                cursor: loader || isButtonDisabled ? "not-allowed" : "pointer",
+                opacity: loader || isButtonDisabled ? 0.6 : 1,
+              }}
+            >
+              {loader ? "Sending..." : "Send"}
+            </button>
           </div>
         </form>
       </div>
@@ -81,4 +101,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default MessageForm;
