@@ -5,7 +5,7 @@ import { Context } from "../main";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const { isAuthenticated, setIsAuthenticated } = useContext(Context);
+  const { isAuthenticated} = useContext(Context);
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -15,12 +15,12 @@ const Register = () => {
   const [dob, setDob] = useState("");
   const [gender, setGender] = useState("");
   const [password, setPassword] = useState("");
+  const [loader, setLoader] = useState(false);
+
 
   const navigateTo = useNavigate();
-  
-  
+
   //
-  
 
   const isOldEnough = (dob) => {
     const birthDate = new Date(dob);
@@ -28,11 +28,12 @@ const Register = () => {
     const ageMonthCheck = new Date().getMonth() - birthDate.getMonth();
     const ageDayCheck = new Date().getDate() - birthDate.getDate();
 
-    return age > 12 || (age === 12 && (ageMonthCheck > 0 || (ageMonthCheck === 0 && ageDayCheck >= 0)));
+    return (
+      age > 12 ||
+      (age === 12 &&
+        (ageMonthCheck > 0 || (ageMonthCheck === 0 && ageDayCheck >= 0)))
+    );
   };
-
-
-
 
   //
 
@@ -45,10 +46,21 @@ const Register = () => {
     }
     //
     try {
+      setLoader(true);
       await axios
         .post(
           "https://plus-backend.onrender.com/api/v1/user/student/register",
-          { firstName, lastName, email, phone, referalCode, dob, gender, password, role: "Student" },
+          {
+            firstName,
+            lastName,
+            email,
+            phone,
+            referalCode,
+            dob,
+            gender,
+            password,
+            role: "Student",
+          },
           {
             withCredentials: true,
             headers: { "Content-Type": "application/json" },
@@ -56,8 +68,7 @@ const Register = () => {
         )
         .then((res) => {
           toast.success(res.data.message);
-          setIsAuthenticated(true);
-          navigateTo("/");
+          navigateTo("/login");
           setFirstName("");
           setLastName("");
           setEmail("");
@@ -67,8 +78,12 @@ const Register = () => {
           setGender("");
           setPassword("");
         });
+      
     } catch (error) {
       toast.error(error.response.data.message);
+    }
+    finally{
+      setLoader(false);
     }
   };
 
@@ -82,7 +97,8 @@ const Register = () => {
         <h2 className="h2">Sign Up</h2>
         <p>Please Sign Up To Continue</p>
         <p>
-        Join us today and unlock a world of limitless learning possibilities! By signing up, you’ll gain access to our extensive library of courses. 
+          Join us today and unlock a world of limitless learning possibilities!
+          By signing up, you’ll gain access to our extensive library of courses.
         </p>
         <form onSubmit={handleRegistration}>
           <div>
@@ -148,7 +164,7 @@ const Register = () => {
             }}
           >
             <p style={{ marginBottom: 0 }}>Already Registered?</p>
-            <Link 
+            <Link
               to={"/login"}
               style={{ textDecoration: "underline", color: "#f85d16" }}
             >
@@ -156,7 +172,16 @@ const Register = () => {
             </Link>
           </div>
           <div style={{ justifyContent: "center", alignItems: "center" }}>
-            <button type="submit">Register</button>
+            <button
+              type="submit"
+              disabled={loader}
+              style={{
+                cursor: loader ? "not-allowed" : "pointer",
+                opacity: loader ? 0.6 : 1,
+              }}
+            >
+              {loader ? "Wait..." : "Register"}
+            </button>
           </div>
         </form>
       </div>

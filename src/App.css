@@ -6,7 +6,7 @@
   overflow-x: hidden;
   font-family: "Nunito", sans-serif;
 }
-body { 
+body {
   background: #050000;
 }
 .btn {
@@ -118,7 +118,9 @@ h6 {
   overflow-y: hidden;
 }
 .animated-image {
+  height: auto;
   animation: moveUpDown 2s infinite alternate ease-in-out;
+  overflow: hidden;
 }
 
 @keyframes moveUpDown {
@@ -265,6 +267,7 @@ h6 {
   padding-bottom: 60px;
 }
 .biography .banner:first-child {
+  overflow: hidden;
   flex: 1;
   display: flex;
   justify-content: center;
@@ -502,26 +505,27 @@ nav .navLinks .links a:hover {
   cursor: pointer;
 }
 .links #active {
-  color: #199612; 
+  color: #199612;
   font-weight: bold;
 }
 nav .btn {
   color: #e5e5e5;
   background: transparent;
   font-weight: 600;
-  padding: 0; 
-  margin: 0; 
-  cursor: pointer;
+  padding: 0;
+  margin: 0;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.loginBtnDiv, .logoutBtnDiv {
+.loginBtnDiv,
+.logoutBtnDiv {
+  cursor: pointer;
   background: linear-gradient(135deg, rgb(251, 90, 31), rgb(248, 93, 22));
   height: 40px;
-  width:40px;
+  width: 40px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -530,11 +534,11 @@ nav .btn {
   overflow: hidden;
 }
 
-.loginBtnDiv:hover, .logoutBtnDiv:hover {
+.loginBtnDiv:hover,
+.logoutBtnDiv:hover {
   transform: scale(1.04);
   background: linear-gradient(135deg, rgb(156, 150, 148), rgb(15, 14, 14));
 }
-
 
 nav .hamburger {
   display: none;
@@ -587,7 +591,6 @@ nav svg {
     top: 79px;
   }
   nav .navLinks .links {
-    
     flex-direction: column;
     text-align: center;
   }

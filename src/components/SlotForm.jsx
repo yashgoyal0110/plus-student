@@ -18,6 +18,7 @@ const SlotForm = () => {
   const [comment, setComment] = useState("");
   const [whatsapp, setWhatsapp] = useState(false);
   const [courseArray, setCourseArray] = useState([]);
+  const [loader, setLoader] = useState(false);
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -74,6 +75,7 @@ const SlotForm = () => {
     e.preventDefault();
 
     try {
+      setLoader(true);
       const whatsappBool = Boolean(whatsapp);
       const { data } = await axios.post(
         "https://plus-backend.onrender.com/api/v1/slot/post",
@@ -121,8 +123,12 @@ const SlotForm = () => {
         setInstructorLastName(""),
         setWhatsapp(""),
         setComment("");
+      
     } catch (error) {
       toast.error(error.response.data.message || "Can't book slot");
+    }
+    finally{
+      setLoader(false);
     }
   };
 
@@ -248,7 +254,16 @@ const SlotForm = () => {
               style={{ flex: "none", width: "25px" }}
             />
           </div>
-          <button style={{ margin: "0 auto" }}>CONFIRM SLOT</button>
+          <button
+            disabled={loader}
+            style={{
+              margin: "0 auto",
+              cursor: loader ? "not-allowed" : "pointer",
+              opacity: loader ? 0.6 : 1,
+            }}
+          >
+            {loader ? "WAIT..." : "CONFIRM SLOT"}
+          </button>
         </form>
       </div>
     </>
