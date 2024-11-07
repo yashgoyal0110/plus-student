@@ -83,7 +83,7 @@ const Navbar = () => {
           ) : (
             <div className="loginBtnDiv" title="Login">
               <button className="loginBtn btn" onClick={goToLogin}>
-                <FaUser />
+               <FaUser  style={{ fontSize: "25px", color: "#e5e5e5",  }}/>
               </button>
             </div>
           )}
