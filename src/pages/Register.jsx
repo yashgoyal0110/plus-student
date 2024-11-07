@@ -39,50 +39,49 @@ const Register = () => {
 
   const handleRegistration = async (e) => {
     e.preventDefault();
-    //
-    if (!isOldEnough(dob)) {
-      toast.error("You must be at least 12 years old to register.");
-      return;
-    }
-    //
+    setLoader(true);
     try {
-      setLoader(true);
-      await axios
-        .post(
-          "https://plus-backend.onrender.com/api/v1/user/student/register",
-          {
-            firstName,
-            lastName,
-            email,
-            phone,
-            referalCode,
-            dob,
-            gender,
-            password,
-            role: "Student",
-          },
-          {
-            withCredentials: true,
-            headers: { "Content-Type": "application/json" },
-          }
-        )
-        .then((res) => {
-          toast.success(res.data.message);
-          navigateTo("/login");
-          setFirstName("");
-          setLastName("");
-          setEmail("");
-          setPhone("");
-          setReferalCode("");
-          setDob("");
-          setGender("");
-          setPassword("");
-        });
-      
+      // First, make the request to the backend
+      const res = await axios.post(
+        "https://plus-backend.onrender.com/api/v1/user/student/register",
+        {
+          firstName,
+          lastName,
+          email,
+          phone,
+          referalCode,
+          dob,
+          gender,
+          password,
+          role: "Student",
+        },
+        {
+          withCredentials: true,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+
+      // Check age only if backend request is successful
+      if (!isOldEnough(dob)) {
+        toast.error("You must be at least 12 years old to register.");
+        return;
+      }
+
+      // If both backend request and age validation are successful
+      toast.success(res.data.message);
+      navigateTo("/login");
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setPhone("");
+      setReferalCode("");
+      setDob("");
+      setGender("");
+      setPassword("");
+
     } catch (error) {
-      toast.error(error.response.data.message);
-    }
-    finally{
+      toast.error(error.response?.data?.message || "Registration failed");
+    } finally {
       setLoader(false);
     }
   };
@@ -90,7 +89,6 @@ const Register = () => {
   if (isAuthenticated) {
     return <Navigate to={"/"} />;
   }
-
   return (
     <>
       <div className="container form-component register-form">
