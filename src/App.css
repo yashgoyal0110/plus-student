@@ -118,7 +118,9 @@ h6 {
   overflow-y: hidden;
 }
 .animated-image {
+  height: auto;
   animation: moveUpDown 2s infinite alternate ease-in-out;
+  overflow: hidden;
 }
 
 @keyframes moveUpDown {
@@ -265,6 +267,7 @@ h6 {
   padding-bottom: 60px;
 }
 .biography .banner:first-child {
+  overflow: hidden;
   flex: 1;
   display: flex;
   justify-content: center;
@@ -511,7 +514,6 @@ nav .btn {
   font-weight: 600;
   padding: 0; 
   margin: 0; 
-  cursor: pointer;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -519,6 +521,7 @@ nav .btn {
 }
 
 .loginBtnDiv, .logoutBtnDiv {
+  cursor: pointer;
   background: linear-gradient(135deg, rgb(251, 90, 31), rgb(248, 93, 22));
   height: 40px;
   width:40px;
