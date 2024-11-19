@@ -15,7 +15,7 @@
 
 //   const handleLogout = async () => {
 //     await axios
-//       .get("https://plus-backend.onrender.com/api/v1/user/student/logout", {
+//       .get("https://plus-backend.onrender.com/user/student/logout", {
 //         withCredentials: true,
 //       })
 //       .then((res) => {
@@ -126,7 +126,7 @@
 
 //     // Proceed with logout if confirmed
 //     try {
-//       const response = await axios.get("https://plus-backend.onrender.com/api/v1/user/student/logout", {
+//       const response = await axios.get("https://plus-backend.onrender.com/user/student/logout", {
 //         withCredentials: true,
 //       });
 
@@ -238,7 +238,7 @@ const Navbar = () => {
           onClick: async () => {
             try {
               const response = await axios.get(
-                "https://plus-backend.onrender.com/api/v1/user/student/logout",
+                "https://plus-backend.onrender.com/user/student/logout",
                 {
                   withCredentials: true,
                 }
@@ -280,6 +280,9 @@ const Navbar = () => {
       ],
     });
   };
+  //
+
+
   const goToLogin = () => {
     navigateTo("/login");
   };

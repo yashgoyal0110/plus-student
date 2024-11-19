@@ -5,7 +5,7 @@ import { Context } from "../main";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const { isAuthenticated} = useContext(Context);
+  const { isAuthenticated} = useContext(Context); 
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -39,50 +39,47 @@ const Register = () => {
 
   const handleRegistration = async (e) => {
     e.preventDefault();
-    //
-    if (!isOldEnough(dob)) {
-      toast.error("You must be at least 12 years old to register.");
-      return;
-    }
-    //
+    setLoader(true);
     try {
-      setLoader(true);
-      await axios
-        .post(
-          "https://plus-backend.onrender.com/api/v1/user/student/register",
-          {
-            firstName,
-            lastName,
-            email,
-            phone,
-            referalCode,
-            dob,
-            gender,
-            password,
-            role: "Student",
-          },
-          {
-            withCredentials: true,
-            headers: { "Content-Type": "application/json" },
-          }
-        )
-        .then((res) => {
-          toast.success(res.data.message);
-          navigateTo("/login");
-          setFirstName("");
-          setLastName("");
-          setEmail("");
-          setPhone("");
-          setReferalCode("");
-          setDob("");
-          setGender("");
-          setPassword("");
-        });
-      
+      const res = await axios.post(
+        "https://plus-backend.onrender.com/user/student/register",
+        {
+          firstName,
+          lastName,
+          email,
+          phone,
+          referalCode,
+          dob,
+          gender,
+          password,
+          role: "Student",
+        },
+        {
+          withCredentials: true,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+
+
+      if (!isOldEnough(dob)) {
+        toast.error("You must be at least 12 years old to register.");
+        return;
+      }
+
+      toast.success(res.data.message);
+      navigateTo("/login");
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setPhone("");
+      setReferalCode("");
+      setDob("");
+      setGender("");
+      setPassword("");
+
     } catch (error) {
-      toast.error(error.response.data.message);
-    }
-    finally{
+      toast.error(error.response?.data?.message || "Registration failed");
+    } finally {
       setLoader(false);
     }
   };
@@ -90,7 +87,6 @@ const Register = () => {
   if (isAuthenticated) {
     return <Navigate to={"/"} />;
   }
-
   return (
     <>
       <div className="container form-component register-form">

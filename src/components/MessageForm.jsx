@@ -15,7 +15,7 @@ const MessageForm = () => {
       setLoader(true);
       await axios
         .post(
-          "https://plus-backend.onrender.com/api/v1/message/send", // url
+          "https://plus-backend.onrender.com/message/send", // url
           { firstName, lastName, email, phone, message }, // data to be send
           {
             withCredentials: true,

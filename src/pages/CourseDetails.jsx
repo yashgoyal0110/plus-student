@@ -1,11 +1,11 @@
-import { useParams } from "react-router-dom";
 import "../courseDetails.css";
+import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Context } from "../main";
-import { useNavigate } from "react-router-dom";
-import { ClipLoader } from "react-spinners"
+import Loading from "../components/Loading";
+import CourseDetailsCard from "../components/CourseDetailsCard";
 
 const CourseDetails = () => {
   const { id } = useParams();
@@ -13,17 +13,16 @@ const CourseDetails = () => {
   const [student, setStudent] = useState({});
   const { isAuthenticated, setIsAuthenticated } = useContext(Context);
   const navigateTo = useNavigate();
-  const [loading, setLoading] = useState(true); 
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchCourses = async () => {
       try {
         const { data } = await axios.get(
-          "https://plus-backend.onrender.com/api/v1/course/allcourses",
+          "https://plus-backend.onrender.com/course/allcourses",
           { withCredentials: true }
         );
         setCourseArray(data.courses);
-        setLoading(false); 
+        setLoading(false);
       } catch (error) {
         console.log(error.response.data.message);
         setLoading(false);
@@ -36,7 +35,7 @@ const CourseDetails = () => {
     const fetchStudent = async () => {
       try {
         const { data } = await axios
-          .get("https://plus-backend.onrender.com/api/v1/user/student/me", {
+          .get("https://plus-backend.onrender.com/user/student/me", {
             withCredentials: true,
           })
           .then(() => {
@@ -69,7 +68,7 @@ const CourseDetails = () => {
         const receiptId = "qwsaq1";
 
         const response = await fetch(
-          "https://plus-backend.onrender.com/api/v1/purchase/buy",
+          "https://plus-backend.onrender.com/purchase/buy",
           {
             method: "POST",
             body: JSON.stringify({
@@ -127,28 +126,7 @@ const CourseDetails = () => {
   // Razorpay *************************************************************************************
 
   if (loading) {
-    return (
-      <div
-            className="loading-container"
-            style={{
-              position: 'relative',
-              display: "flex",
-              justifyContent: "center",
-              marginTop: "50px",
-            }}
-          >
-            <ClipLoader
-              size={100}
-              color={"#e35108f2"}
-              loading={loading}
-              cssOverride={{
-                display: "block",
-                marginTop: "200px",
-                borderWidth: "5px",
-              }}
-            />
-          </div>
-    );
+    return <Loading loading={loading} />;
   }
 
   return (
@@ -156,38 +134,10 @@ const CourseDetails = () => {
       {reqCourse && (
         <>
           <div className="detailCard leftCourse">
-            <img
-              src={reqCourse.imageUrl}
-              alt={reqCourse.title}
-              className="detailImage"
+            <CourseDetailsCard
+              reqCourse={reqCourse}
+              paymentHandler={paymentHandler}
             />
-            <div className="courseContent">
-              <h2 className="courseName">{reqCourse.title}-1</h2>
-              <p className="instructorName">
-                Instructor: {reqCourse.instructor}
-              </p>
-              <p className="courseCode" style={{ fontSize: "16px" }}>
-                Course code: {reqCourse.code}
-              </p>
-              <p className="detail">
-                <strong>Price:</strong> {`${reqCourse.price} ₹`}
-              </p>
-              <p className="detail">
-                <strong>Duration:</strong> {`${reqCourse.duration} months`}
-              </p>
-              <p className="detail">
-                <strong>Mode:</strong> {reqCourse.mode}
-              </p>
-              <p className="detail">
-                <strong>Validity:</strong> {reqCourse.validity}
-              </p>
-              <button
-                className="buyNowButton"
-                onClick={(e) => paymentHandler(e)}
-              >
-                <strong>Buy Now</strong>
-              </button>
-            </div>
           </div>
 
           <div className="iframeContainer">
@@ -209,41 +159,10 @@ const CourseDetails = () => {
           </div>
 
           <div className="detailCard rightCourse">
-            <img
-              src={reqCourse.imageUrl}
-              alt={reqCourse.title}
-              className="detailImage"
+            <CourseDetailsCard
+              paymentHandler={paymentHandler}
+              reqCourse={reqCourse}
             />
-            <div className="courseContent">
-              <h2 className="courseName">{reqCourse.title}-2</h2>
-              <p className="instructorName">
-                Instructor: {reqCourse.instructor}
-              </p>
-              <p className="courseCode" style={{ fontSize: "16px" }}>
-                Course code:{" "}
-                {`${reqCourse.code}${Math.floor(
-                  Math.random() * 10 
-                ).toString()}`}
-              </p>
-              <p className="detail">
-                <strong>Price:</strong> {`${reqCourse.price * 10} ₹`}
-              </p>
-              <p className="detail">
-                <strong>Duration:</strong> {`${reqCourse.duration} months`}
-              </p>
-              <p className="detail">
-                <strong>Mode:</strong> {reqCourse.mode}
-              </p>
-              <p className="detail">
-                <strong>Validity:</strong> {reqCourse.validity}
-              </p>
-              <button
-                className="buyNowButton"
-                onClick={(e) => paymentHandler(e, reqCourse._id)}
-              >
-                <strong>Buy Now</strong>
-              </button>
-            </div>
           </div>
         </>
       )}

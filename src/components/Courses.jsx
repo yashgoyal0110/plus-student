@@ -8,11 +8,12 @@ import { useState } from "react";
 const Courses = () => {
   const navigateTo = useNavigate();
   const [courseArray, setCourseArray] = useState([]);
+
   useEffect(() => {
     const fetchCourses = async () => {
       try {
         const { data } = await axios.get(
-          "https://plus-backend.onrender.com/api/v1/course/allcourses",
+          "https://plus-backend.onrender.com/course/allcourses",
           { withCredentials: true }
         );
         setCourseArray(data.courses);
