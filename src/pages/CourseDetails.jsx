@@ -18,7 +18,7 @@ const CourseDetails = () => {
     const fetchCourses = async () => {
       try {
         const { data } = await axios.get(
-          "https://plus-backend.onrender.com/course/allcourses",
+          "https://plus-backend.onrender.com/api/v1/course/allcourses",
           { withCredentials: true }
         );
         setCourseArray(data.courses);
@@ -35,7 +35,7 @@ const CourseDetails = () => {
     const fetchStudent = async () => {
       try {
         const { data } = await axios
-          .get("https://plus-backend.onrender.com/user/student/me", {
+          .get("https://plus-backend.onrender.com/api/v1/user/student/me", {
             withCredentials: true,
           })
           .then(() => {
@@ -68,7 +68,7 @@ const CourseDetails = () => {
         const receiptId = "qwsaq1";
 
         const response = await fetch(
-          "https://plus-backend.onrender.com/purchase/buy",
+          "https://plus-backend.onrender.com/api/v1/purchase/buy",
           {
             method: "POST",
             body: JSON.stringify({

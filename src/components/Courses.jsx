@@ -13,7 +13,7 @@ const Courses = () => {
     const fetchCourses = async () => {
       try {
         const { data } = await axios.get(
-          "https://plus-backend.onrender.com/course/allcourses",
+          "https://plus-backend.onrender.com/api/v1/course/allcourses",
           { withCredentials: true }
         );
         setCourseArray(data.courses);

@@ -24,7 +24,7 @@ const SlotForm = () => {
     const fetchCourses = async () => {
       try {
         const { data } = await axios.get(
-          "https://plus-backend.onrender.com/course/allcourses",
+          "https://plus-backend.onrender.com/api/v1/course/allcourses",
           { withCredentials: true }
         );
         setCourseArray(data.courses);
@@ -39,7 +39,7 @@ const SlotForm = () => {
   useEffect(() => {
     const fetchInstructors = async () => {
       const { data } = await axios.get(
-        "https://plus-backend.onrender.com/user/instructors",
+        "https://plus-backend.onrender.com/api/v1/user/instructors",
         { withCredentials: true }
       );
       setInstructors(data.instructors);
@@ -78,7 +78,7 @@ const SlotForm = () => {
       setLoader(true);
       const whatsappBool = Boolean(whatsapp);
       const { data } = await axios.post(
-        "https://plus-backend.onrender.com/slot/post",
+        "https://plus-backend.onrender.com/api/v1/slot/post",
         {
           firstName,
           lastName,
