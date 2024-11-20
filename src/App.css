@@ -670,37 +670,143 @@ select:focus {
 .optionOne {
   color: #060200;
 }
-#loading-container{
+#loading-container {
   position: relative;
   display: flex;
   justify-content: center;
   margin-top: 50px;
 }
+
+/* ////////////////////////////////  */
 .mainContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  overflow: hidden;
+}
+
+.background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.25;
+  z-index: -1;
+}
+
+.contentBox {
+  position: relative;
+  z-index: 1;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  height: 100vh; 
-  width: 100vw; 
-  background-color: #010000;
-  box-sizing: border-box; 
+  width: 80%;
 }
 
+.adminContainer,
+.studentContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-a{
+.adminIcon svg,
+.studentIcon svg {
+  border-radius: 50%;
+  background-color: #199612;
+  font-size: 70px;
+  color: white;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease;
+}
+.adminIcon svg {
+  background-color: #f45225;
+}
+
+.adminText,
+.studentText {
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.adminContainer:hover .adminIcon svg,
+.studentContainer:hover .studentIcon svg {
+  transform: scaleX(-1);
+}
+
+.studentContainer:hover .studentText {
+  color: #199612;
+}
+.adminContainer:hover .adminText {
+  color: orangered;
+}
+a {
   text-decoration: none;
 }
-
-
 @media (max-width: 768px) {
-  .mainContainer {
-    flex-direction: column; 
-    padding: 20px; 
+  .contentBox {
+    flex-direction: column;
+    row-gap: 20px;
   }
 
-  .generalContainer {
-    width: 100px;
-    height: 100px;
+  .adminIcon svg,
+  .studentIcon svg {
+    font-size: 60px;
+  }
+
+  .adminText,
+  .studentText {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .contentBox {
+    flex-direction: column;
+    column-gap: 0;
+  }
+
+  .adminContainer,
+  .studentContainer {
+    height: 70px;
+    width: 70px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .contentBox {
+    flex-direction: column;
+    column-gap: 0;
+  }
+
+  .adminContainer,
+  .studentContainer {
+    height: 60px;
+    width: 60px;
     font-size: 14px;
   }
 }
+
+@media (max-width: 480px) {
+  .adminContainer,
+  .studentContainer {
+    height: 50px;
+    width: 50px;
+    font-size: 12px;
+    margin: 10px;
+  }
+}
+
+/* ////////////////////////////////  */
