@@ -85,7 +85,7 @@ const Register = () => {
   };
 
   if (isAuthenticated) {
-    return <Navigate to={"/"} />;
+    return <Navigate to={"/studentportal"} />;
   }
   return (
     <>

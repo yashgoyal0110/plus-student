@@ -1,11 +1,37 @@
 import { FaLocationArrow, FaPhone } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
-import { Link, useNavigate, } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { Context } from "../main";
+import { useContext, useEffect } from "react";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const Footer = () => {
+  const { isAuthenticated, setIsAuthenticated } = useContext(Context);
+  useEffect(() => {
+    const fetchStudent = async () => {
+      try {
+        await axios
+          .get("https://plus-backend.onrender.com/api/v1/user/student/me", {
+            withCredentials: true,
+          })
+          .then(() => {
+            setIsAuthenticated(true);
+          });
+      } catch (error) {
+        console.log(error.response.data.message);
+      }
+    };
+    fetchStudent();
+  }, [isAuthenticated]);
+  const toastForLogin = () => {
+    if (!isAuthenticated) {
+      toast.error("Login to schedule demo");
+    }
+  };
   const navigateTo = useNavigate();
   const goToHome = () => {
-    navigateTo("/");
+    navigateTo("/studentportal");
   };
   const hours = [
     {
@@ -46,14 +72,23 @@ const Footer = () => {
         <hr />
         <div className="content">
           <div>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Plus_logo.svg" alt="logo" className="logo-img"
-            onClick={goToHome}/>
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Plus_logo.svg"
+              alt="logo"
+              className="logo-img"
+              onClick={goToHome}
+            />
           </div>
           <div>
             <h4>Quick Links</h4>
             <ul>
-              <Link to={"/"}>Home</Link>
-              <Link to={"/slot"}>Schedule Demo</Link>
+              <Link to={"/studentportal"}>Home</Link>
+              <Link
+                to={isAuthenticated ? "/slot" : "/login"}
+                onClick={() => toastForLogin()}
+              >
+                Schedule Demo
+              </Link>
               <Link to={"/about"}>About</Link>
             </ul>
           </div>

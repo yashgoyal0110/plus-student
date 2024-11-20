@@ -1,7 +1,7 @@
 import { useEffect, useContext } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
+import StudentPage from "./pages/StudentPage.jsx";
 import Slot from "./pages/Slot.jsx";
 import AboutUs from "./pages/AboutUs";
 import Register from "./pages/Register";
@@ -13,6 +13,7 @@ import { Context } from "./main";
 import axios from "axios";
 import Footer from "./components/Footer";
 import CourseDetails from "./pages/CourseDetails";
+import Front from "./pages/Front.jsx";
 
 function App() {
   const { isAuthenticated, setIsAuthenticated, setUser } = useContext(Context);
@@ -39,7 +40,8 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Home />} />
+        <Route path="/" element={<Front />}></Route>
+          <Route path="/studentportal" element={<StudentPage />} />
           <Route path="slot" element={<Slot />} />
           <Route path="about" element={<AboutUs />} />
           <Route path="register" element={<Register />} />

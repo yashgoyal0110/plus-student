@@ -3,7 +3,7 @@ import Courses from "../components/Courses";
 import Biography from "../components/Biography";
 import MessageForm from "../components/MessageForm";
 
-const Home = () => {
+const StudentPage = () => {
   return (
     <>
       <Hero
@@ -20,4 +20,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default StudentPage;
