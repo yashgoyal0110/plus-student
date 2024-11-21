@@ -4,6 +4,7 @@
   padding: 0;
   box-sizing: border-box;
   overflow-x: hidden;
+  overflow-y: hidden;
   font-family: "Nunito", sans-serif;
 }
 body {
@@ -706,6 +707,7 @@ select:focus {
   justify-content: space-around;
   align-items: center;
   width: 80%;
+
 }
 
 .adminContainer,
@@ -727,6 +729,7 @@ select:focus {
   color: white;
   margin-bottom: 10px;
   transition: transform 0.3s ease;
+  overflow: hidden;
 }
 .adminIcon svg {
   background-color: #f45225;
@@ -738,11 +741,13 @@ select:focus {
   font-weight: 600;
   color: white;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
 }
 
 .adminContainer:hover .adminIcon svg,
 .studentContainer:hover .studentIcon svg {
   transform: scaleX(-1);
+  overflow: hidden;
 }
 
 .studentContainer:hover .studentText {
@@ -754,27 +759,12 @@ select:focus {
 a {
   text-decoration: none;
 }
-@media (max-width: 768px) {
-  .contentBox {
-    flex-direction: column;
-    row-gap: 20px;
-  }
-
-  .adminIcon svg,
-  .studentIcon svg {
-    font-size: 60px;
-  }
-
-  .adminText,
-  .studentText {
-    font-size: 16px;
-  }
-}
-
 @media (max-width: 1024px) {
   .contentBox {
     flex-direction: column;
     column-gap: 0;
+    row-gap: 40px;
+    overflow: hidden;
   }
 
   .adminContainer,
@@ -782,13 +772,19 @@ a {
     height: 70px;
     width: 70px;
     font-size: 16px;
+    overflow: hidden;
+    border-radius: 50%; 
+  }
+
+  .adminText, .studentText {
+    display: none; 
   }
 }
 
 @media (max-width: 768px) {
   .contentBox {
     flex-direction: column;
-    column-gap: 0;
+    row-gap: 30px;
   }
 
   .adminContainer,
@@ -796,17 +792,28 @@ a {
     height: 60px;
     width: 60px;
     font-size: 14px;
+    border-radius: 50%;
+  }
+
+
+  .adminText, .studentText {
+    display: none; 
   }
 }
 
+
 @media (max-width: 480px) {
+  .contentBox {
+    flex-direction: column;
+    row-gap: 20px; 
+  }
+
   .adminContainer,
   .studentContainer {
     height: 50px;
     width: 50px;
-    font-size: 12px;
-    margin: 10px;
+    font-size: 10px;
+    margin: 5px; 
+    border-radius: 50%;
   }
 }
-
-/* ////////////////////////////////  */

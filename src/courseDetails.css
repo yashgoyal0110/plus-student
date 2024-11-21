@@ -85,7 +85,7 @@
     cursor: pointer;
   }
   .videoFrame {
-    width: 280px; /* Adjust width and height to match your design */
+    width: 280px; 
     height: 180px;
     border-radius: 8px;
     border: 1px solid #ddd;

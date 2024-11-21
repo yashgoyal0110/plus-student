@@ -46,7 +46,6 @@ function App() {
           <Route path="about" element={<AboutUs />} />
           <Route path="register" element={<Register />} />
           <Route path="login" element={<Login />} />
-
           <Route path="details/:id" element={<CourseDetails />} />
         </Routes>
         <ToastContainer position="top-center" />
