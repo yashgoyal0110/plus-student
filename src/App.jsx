@@ -40,7 +40,7 @@ function App() {
       <Router>
         <Navbar />
         <Routes>
-        <Route path="/" element={<Front />}></Route>
+        <Route path="/" element={!isAuthenticated ? <Front /> : <StudentPage />}></Route>
           <Route path="/studentportal" element={<StudentPage />} />
           <Route path="slot" element={<Slot />} />
           <Route path="about" element={<AboutUs />} />
