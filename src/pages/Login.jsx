@@ -33,7 +33,7 @@ const Login = () => {
         .then((res) => {
           toast.success(res.data.message);
           setIsAuthenticated(true);
-          navigateTo("/studentportal");
+          navigateTo("/studentpage");
           setEmail("");
           setPassword("");
         });
@@ -45,7 +45,7 @@ const Login = () => {
   };
 
   if (isAuthenticated) {
-    return <Navigate to="/studentportal" />;
+    return <Navigate to="/studentpage" />;
   }
 
   return (

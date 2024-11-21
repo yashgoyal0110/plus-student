@@ -31,7 +31,7 @@ const Footer = () => {
   };
   const navigateTo = useNavigate();
   const goToHome = () => {
-    navigateTo("/studentportal");
+    navigateTo("/studentpage");
   };
   const hours = [
     {
@@ -82,7 +82,7 @@ const Footer = () => {
           <div>
             <h4>Quick Links</h4>
             <ul>
-              <Link to={"/studentportal"}>Home</Link>
+              <Link to={"/studentpage"}>Home</Link>
               <Link
                 to={isAuthenticated ? "/slot" : "/login"}
                 onClick={() => toastForLogin()}

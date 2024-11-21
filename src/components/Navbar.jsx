@@ -36,7 +36,7 @@ const Navbar = () => {
               if (response.status === 200) {
                 toast.success(response.data.message);
                 setIsAuthenticated(false);
-                navigateTo('/studentportal')
+                navigateTo('/studentpage')
               }
             } catch (err) {
               toast.error(err.response?.data?.message || "Logout failed");
@@ -77,7 +77,7 @@ const Navbar = () => {
   };
 
   const goToHome = () => {
-    navigateTo("/studentportal");
+    navigateTo("/studentpage");
   };
 
   const toastForLogin = () => {
@@ -101,9 +101,9 @@ const Navbar = () => {
         <div className={show ? "navLinks showmenu" : "navLinks"}>
           <div className="links">
             <Link
-              to={"/studentportal"}
+              to={"/studentpage"}
               onClick={() => setShow(!show)}
-              id={location.pathname === "/studentportal" ? "active" : ""}
+              id={location.pathname === "/studentpage" ? "active" : ""}
             >
               Home
             </Link>

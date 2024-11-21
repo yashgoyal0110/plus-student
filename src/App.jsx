@@ -41,7 +41,7 @@ function App() {
         <Navbar />
         <Routes>
         <Route path="/" element={!isAuthenticated ? <Front /> : <StudentPage />}></Route>
-          <Route path="/studentportal" element={<StudentPage />} />
+          <Route path="/studentpage" element={<StudentPage />} />
           <Route path="slot" element={<Slot />} />
           <Route path="about" element={<AboutUs />} />
           <Route path="register" element={<Register />} />
