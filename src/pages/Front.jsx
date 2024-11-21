@@ -19,8 +19,17 @@ function Front() {
         </video>
 
         <div className="contentBox">
-          {/* Admin Container */}
-          <div className="adminContainer">
+         
+          {/* Student Container */}
+          <div className="studentContainer" onClick={() => navigationHandle()}>
+            <div className="studentIcon">
+              <PiStudentFill />
+            </div>
+            <p className="studentText">Login as Student</p>
+          </div>
+
+           {/* Admin Container */}
+           <div className="adminContainer">
             <a
               href="https://plus-admin.vercel.app/login"
               target="_blank"
@@ -31,13 +40,6 @@ function Front() {
             </a>
           </div>
 
-          {/* Student Container */}
-          <div className="studentContainer" onClick={() => navigationHandle()}>
-            <div className="studentIcon">
-              <PiStudentFill />
-            </div>
-            <p className="studentText">Login as Student</p>
-          </div>
         </div>
       </div>
     </>
