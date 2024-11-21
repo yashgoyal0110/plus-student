@@ -184,7 +184,7 @@ const SlotForm = () => {
               <option value="">Select Gender</option>
               <option value="Male">Male</option>
               <option value="Female">Female</option>
-              <option value="Female">Custom</option>
+              <option value="Custom">Custom</option>
             </select>
             <input
               type="date"
