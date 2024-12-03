@@ -5,7 +5,8 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { Context } from "../main";
 import Loading from "../components/Loading";
-import CourseDetailsCard from "../components/CourseDetailsCard";
+import DetailsCardOne from "../components/DetailsCardOne";
+import DetailsCardTwo from "../components/DetailsCardTwo";
 
 const CourseDetails = () => {
   const { id } = useParams();
@@ -126,7 +127,7 @@ const CourseDetails = () => {
   // Razorpay *************************************************************************************
 
   if (loading) {
-    return <Loading loading={loading} />;
+    return <Loading loading={loading} />
   }
 
   return (
@@ -134,7 +135,7 @@ const CourseDetails = () => {
       {reqCourse && (
         <>
           <div className="detailCard leftCourse">
-            <CourseDetailsCard
+            <DetailsCardOne
               reqCourse={reqCourse}
               paymentHandler={paymentHandler}
             />
@@ -159,7 +160,7 @@ const CourseDetails = () => {
           </div>
 
           <div className="detailCard rightCourse">
-            <CourseDetailsCard
+            <DetailsCardTwo
               paymentHandler={paymentHandler}
               reqCourse={reqCourse}
             />

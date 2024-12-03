@@ -40,6 +40,19 @@ const Register = () => {
   const handleRegistration = async (e) => {
     e.preventDefault();
     setLoader(true);
+    if(phone.toString().trim().length !== 10){
+      console.log("phoneError");
+      toast.error("phone must contain 10 digits");
+      setLoader(false);
+      return;
+      
+    }
+
+    if (!isOldEnough(dob)) {
+      toast.error("You must be at least 12 years old to register.");
+      setLoader(false);
+      return;
+    }
     try {
       const res = await axios.post(
         "https://plus-backend.onrender.com/api/v1/user/student/register",
@@ -60,12 +73,6 @@ const Register = () => {
         }
       );
 
-
-      if (!isOldEnough(dob)) {
-        toast.error("You must be at least 12 years old to register.");
-        return;
-      }
-
       toast.success(res.data.message);
       navigateTo("/login");
       setFirstName("");
@@ -78,6 +85,7 @@ const Register = () => {
       setPassword("");
 
     } catch (error) {
+      console.log(error.message);
       toast.error(error.response?.data?.message || "Registration failed");
     } finally {
       setLoader(false);
