@@ -76,6 +76,12 @@ const SlotForm = () => {
 
     try {
       setLoader(true);
+      if(phone.toString().trim().length !== 10){
+        console.log("phoneError");
+        toast.error("phone must contain 10 digits");
+        setLoader(false);
+        return;
+      }
       const whatsappBool = Boolean(whatsapp);
       const { data } = await axios.post(
         "https://plus-backend.onrender.com/api/v1/slot/post",
