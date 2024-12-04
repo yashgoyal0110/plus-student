@@ -53,7 +53,7 @@ const Register = () => {
     }
     try {
       const res = await axios.post(
-        "https://plus-backend.onrender.com/api/v1/user/student/register",
+        "https://plus-backendd.onrender.com/api/v1/user/student/register",
         {
           firstName,
           lastName,

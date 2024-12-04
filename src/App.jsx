@@ -21,7 +21,7 @@ function App() {
     const fetchUser = async () => {
       try {
         const response = await axios.get(
-          "https://plus-backend.onrender.com/api/v1/user/student/me",
+          "https://plus-backendd.onrender.com/api/v1/user/student/me",
           { withCredentials: true }
         );
         setIsAuthenticated(true);

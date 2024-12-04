@@ -26,7 +26,7 @@ const Navbar = () => {
           onClick: async () => {
             try {
               const response = await axios.get(
-                "https://plus-backend.onrender.com/api/v1/user/student/logout",
+                "https://plus-backendd.onrender.com/api/v1/user/student/logout",
                 {
                   withCredentials: true,
                 }

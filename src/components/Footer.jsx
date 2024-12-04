@@ -12,7 +12,7 @@ const Footer = () => {
     const fetchStudent = async () => {
       try {
         await axios
-          .get("https://plus-backend.onrender.com/api/v1/user/student/me", {
+          .get("https://plus-backendd.onrender.com/api/v1/user/student/me", {
             withCredentials: true,
           })
           .then(() => {
