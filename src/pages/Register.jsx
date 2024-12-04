@@ -41,11 +41,9 @@ const Register = () => {
     e.preventDefault();
     setLoader(true);
     if(phone.toString().trim().length !== 10){
-      console.log("phoneError");
       toast.error("phone must contain 10 digits");
       setLoader(false);
       return;
-      
     }
 
     if (!isOldEnough(dob)) {
@@ -85,7 +83,6 @@ const Register = () => {
       setPassword("");
 
     } catch (error) {
-      console.log(error.message);
       toast.error(error.response?.data?.message || "Registration failed");
     } finally {
       setLoader(false);

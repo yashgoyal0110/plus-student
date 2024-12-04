@@ -25,7 +25,6 @@ const CourseDetails = () => {
         setCourseArray(data.courses);
         setLoading(false);
       } catch (error) {
-        console.log(error.response.data.message);
         setLoading(false);
       }
     };
@@ -44,7 +43,7 @@ const CourseDetails = () => {
             setStudent(data.user);
           });
       } catch (error) {
-        console.log(error.response.data.message);
+        return(error.message);
       }
     };
     fetchStudent();
@@ -114,7 +113,6 @@ const CourseDetails = () => {
         const rzp1 = new window.Razorpay(options);
         rzp1.on("payment.failed", function (response) {
           toast.error("Payment failed. Please try again.");
-          console.log(response.error);
         });
         rzp1.open();
       } catch (error) {

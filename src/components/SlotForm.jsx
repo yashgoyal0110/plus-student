@@ -29,7 +29,7 @@ const SlotForm = () => {
         );
         setCourseArray(data.courses);
       } catch (error) {
-        console.log(error.response.data.message);
+        return error.message
       }
     };
     fetchCourses();
@@ -77,7 +77,6 @@ const SlotForm = () => {
     try {
       setLoader(true);
       if(phone.toString().trim().length !== 10){
-        console.log("phoneError");
         toast.error("phone must contain 10 digits");
         setLoader(false);
         return;

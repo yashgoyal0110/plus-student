@@ -29,7 +29,6 @@ function App() {
       } catch (error) {
         setIsAuthenticated(false);
         setUser({});
-        console.log(error);
       }
     };
     fetchUser();

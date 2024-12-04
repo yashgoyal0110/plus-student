@@ -19,7 +19,7 @@ const Footer = () => {
             setIsAuthenticated(true);
           });
       } catch (error) {
-        console.log(error.response.data.message);
+        return error.message;
       }
     };
     fetchStudent();
